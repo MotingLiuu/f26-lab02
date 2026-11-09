@@ -24,6 +24,9 @@ class AvailabilityProperties {
     /** Provided example: every returned free slot is genuinely free (overlaps no booking). */
     @Property
     void freeSlotsNeverOverlapABooking(@ForAll("scenarios") Scenario s) {
+        // @ForAll: jqwik's parameter's annotation
+        // "scenarios"：生成器的名字，不是变量名。
+        // Scenario: Java type
         List<TimeInterval> free = calc.freeSlots(s.dayStart(), s.dayEnd(), s.bookings());
         for (TimeInterval slot : free) {
             for (TimeInterval booking : s.bookings()) {
